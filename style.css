@@ -1,0 +1,107 @@
+@import url('https://fonts.googleapis.com/css2?family=Gravitas+One&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Oswald:wght@200..700&family=Sekuya&display=swap');
+
+* {
+    margin: 0;
+    box-sizing: border-box;
+}
+
+
+.container {
+    height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr auto;
+    grid-template-areas: 
+    "header" "content" "footer";
+}
+
+header {
+    background-color: black;
+    display: flex;
+    justify-content: center;
+    grid-area: header;
+}
+
+header svg {
+    transition: scale 500ms ease;
+
+}
+
+header svg path {
+    fill: white;
+    stroke: black;
+    stroke-width: 1;
+    stroke-dasharray: 100;
+    stroke-dashoffset: 0;
+
+    transition: stroke-dashoffset 0.5s linear,
+    stroke-dasharray 0.5 ease;
+}
+
+header svg:hover path {
+    stroke-dasharray: 40 50;
+    animation: walk 4s infinite linear;
+}
+header svg:hover {
+    scale: 1.1;
+}
+header span {
+    font-family: "Oswald", sans-serif;
+    opacity: 0;
+    transition: opacity 500ms ease;
+}
+header:has(svg:hover) span {
+
+    opacity: 1;
+}
+
+@keyframes walk {
+    from {
+        stroke-dashoffset: 0;
+    }
+    to {
+        stroke-dashoffset: 90;
+    }
+}
+
+.logo {
+    font-size: 32px;
+    display: flex;
+    align-items: center;
+    gap: 1em;
+}
+.logo-name-left,
+.logo-name-right {
+    color: white;
+}
+
+.content {
+    display: flex;
+    padding: 1em 4em;
+    justify-content: space-between;
+    grid-area: content;
+    background-color: black;
+}
+.content .contact {
+    background-color: red;
+    width: 20%;
+}
+.content .books {
+    background-color: blue;
+    width: 40%;
+}
+.content .addbook {
+    background-color: green;
+    width: 20%;
+}
+
+footer {
+    grid-area: footer;
+    background-color: black;
+    color: white;
+    padding: 1em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1em;
+}
