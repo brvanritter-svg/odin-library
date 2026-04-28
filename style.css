@@ -16,7 +16,6 @@
 }
 
 header {
-    background-color: black;
     display: flex;
     justify-content: center;
     grid-area: header;
@@ -80,28 +79,115 @@ header:has(svg:hover) span {
     padding: 1em 4em;
     justify-content: space-between;
     grid-area: content;
-    background-color: black;
 }
 .content .contact {
-    background-color: red;
     width: 20%;
 }
 .content .books {
-    background-color: blue;
     width: 40%;
 }
 .content .addbook {
-    background-color: green;
     width: 20%;
 }
 
 footer {
     grid-area: footer;
-    background-color: black;
     color: white;
     padding: 1em;
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 1em;
+}
+
+.contact,
+.books,
+.addbook {
+    background-color: rgba(255, 255, 255, 0.1);
+    
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 16px;
+    color: #fff;
+    padding: 1em;
+}
+
+body {
+    background-color: black;
+}
+
+.addbook {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+}
+
+.addbook span {
+    font-size: 1.5rem;
+}
+.addbook #addbook {
+    align-self: center;
+    font-size: 2rem;
+    border-radius: 50%;
+    border: none;
+    background-color: rgba(255, 255, 255, 0.1);
+    color: white;
+    height: 3rem;
+    width: 3rem;
+}
+
+.addbook form {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    font-size: 1em;
+}
+
+.addbook form input {
+    border-radius: 16px;
+    border: 1px solid transparent;
+    background-color: rgba(255, 255, 255, 0.4);
+    padding: 0.5em 1em;
+    color: white;
+    
+}
+.addbook form input:focus{
+    outline: none;
+    background-color: rgba(255, 255, 255, 0.1);
+    
+    
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 16px;
+}
+.addbook form label {
+    padding-left: 0.5em;
+}
+
+.addbook form div button {
+    width: 6em;
+    height: 2em;
+    border: none;
+    border-radius: 1em;
+
+}
+
+form input[type="number"] {
+    appearance: textfield;
+}
+
+.form-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 2em;
+}
+
+.form-buttons button {
+    transition: background-color 200ms ease;
+    transition: color 200ms ease;
+}
+
+.form-buttons button:hover {
+    background-color: black;
+    color: white;
 }
