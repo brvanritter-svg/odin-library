@@ -80,7 +80,7 @@ header:has(svg:hover) span {
     justify-content: space-between;
     grid-area: content;
 }
-.content .contact {
+.content .info {
     width: 20%;
 }
 .content .books {
@@ -100,7 +100,7 @@ footer {
     gap: 1em;
 }
 
-.contact,
+.info,
 .books,
 .addbook {
     background-color: rgba(255, 255, 255, 0.1);
@@ -115,7 +115,8 @@ body {
     background-color: black;
 }
 
-.addbook {
+.addbook .initialAddBook,
+.addbook{
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -123,10 +124,10 @@ body {
     gap: 1rem;
 }
 
-.addbook span {
+.addbook .initialAddBook span {
     font-size: 1.5rem;
 }
-.addbook #addbook {
+.addbook .initialAddBook #addbook {
     align-self: center;
     font-size: 2rem;
     border-radius: 50%;
@@ -142,6 +143,7 @@ body {
     flex-direction: column;
     gap: 1em;
     font-size: 1em;
+    flex: auto
 }
 
 .addbook form input {
@@ -150,7 +152,7 @@ body {
     background-color: rgba(255, 255, 255, 0.4);
     padding: 0.5em 1em;
     color: white;
-    
+    transition: background-color .2s ease;
 }
 .addbook form input:focus{
     outline: none;
@@ -160,7 +162,8 @@ body {
     border: 1px solid rgba(255, 255, 255, 0.2);
     border-radius: 16px;
 }
-.addbook form label {
+.addbook form label,
+form span {
     padding-left: 0.5em;
 }
 
@@ -176,6 +179,25 @@ form input[type="number"] {
     appearance: textfield;
 }
 
+form input[type="file"] {
+    display: none;
+}
+
+form label[for="cover"] {
+    margin: 2em 0 0.5em;
+    background-color: #e9e9ed;
+    color: black;
+    text-align: center;
+    border-radius: 16px;
+    padding: 0.5em 1em ;
+    transition: background-color .2s ease, color .2s ease;
+}
+form label[for="cover"]:hover {
+    background-color: black;
+    color: white;
+    cursor: pointer;
+}
+
 .form-buttons {
     display: flex;
     justify-content: center;
@@ -185,9 +207,22 @@ form input[type="number"] {
 .form-buttons button {
     transition: background-color 200ms ease;
     transition: color 200ms ease;
+    cursor: pointer;
 }
 
 .form-buttons button:hover {
     background-color: black;
     color: white;
+}
+form {
+    transition: opacity .3s ease;
+}
+.form-close {
+    opacity: 0;
+}
+.initialAddBook {
+    transition: opacity .3s ease;
+}
+.addbook-close {
+    opacity: 1;
 }
