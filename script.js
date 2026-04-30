@@ -109,7 +109,7 @@ function addBookToLibrary () {
     coverInput.setAttribute("name","cover");
     coverInput.setAttribute("accept","image/*");
 
-    const coverSpan = document.createElement("span");
+    const coverSpan = document.createElement("em");
     coverSpan.textContent = "Selected: "
     coverSpan.setAttribute("class","output");
 
