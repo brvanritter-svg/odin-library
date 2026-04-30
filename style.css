@@ -225,3 +225,14 @@ form {
 .addbook-close {
     opacity: 1;
 }
+form span {
+    display: block;
+    min-width: 100%;
+    width: 0;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    font-weight: bold;
+    font-size: 12px;
+    color: darkgray;
+}

@@ -29,9 +29,12 @@ function addBookCard () {
         const bookCard = document.createElement("div");
         bookCard.setAttribute("class","book-card");
 
+        if (!file.length === 0) {      
         const cover = document.createElement("img");
         cover.src = URL.createObjectURL(file.at(-1));
-        bookCard.append(cover);
+        }
+        const title = document.createElement("span");
+        title.textContent = element.title        
         bookWindow.append(bookCard);
     });
 }
@@ -42,7 +45,7 @@ function addBookToLibrary () {
 // Clear div
     initialBookWindow.style.display = "none";
     
-    
+    file = [];
 
 // Create form
 
@@ -109,7 +112,7 @@ function addBookToLibrary () {
     coverInput.setAttribute("name","cover");
     coverInput.setAttribute("accept","image/*");
 
-    const coverSpan = document.createElement("em");
+    const coverSpan = document.createElement("span");
     coverSpan.textContent = "Selected: "
     coverSpan.setAttribute("class","output");
 
