@@ -2,9 +2,9 @@ const addBookWindow = document.querySelector(".addbook");
 const initialBookWindow = document.querySelector(".initialAddBook");
 const addBookButton = document.querySelector("#addbook");
 
-
 const myLibrary = [];
 let file = [];
+let fileAdded = false;
 
 function makeBook(title,author,pages, year,read,uniqueid) {
     
@@ -13,30 +13,66 @@ function makeBook(title,author,pages, year,read,uniqueid) {
     this.pages = pages;
     this.year = year;
     if (read == null) {
-        return this.read = false;
+        this.read = false;
     } else {
-        return this.read = true;
-    };
+        this.read = true;
+    }
     this.uniqueid = uniqueid;
-    this.info = () => console.log(`${this.title} by ${this.author}, ${this.pages} pages, ${this.read === true ? "done reading" : "not read yet"}`)
 }
 
 function addBookCard () {
     const bookWindow = document.querySelector(".books");
     const infoWindow = document.querySelector(".info");
-
-    myLibrary.forEach(element => {
+    const current = myLibrary.at(-1);
+    if (current) {
         const bookCard = document.createElement("div");
+        bookCard.setAttribute("id",current.uniqueid);
         bookCard.setAttribute("class","book-card");
-
-        if (!file.length === 0) {      
+        const imagePlaceHolder = document.createElement("div");
+        imagePlaceHolder.classList.add("image-placeholder")
+        if (fileAdded) {
         const cover = document.createElement("img");
         cover.src = URL.createObjectURL(file.at(-1));
+        imagePlaceHolder.append(cover);
+        }else {
+            imagePlaceHolder.textContent = "NO COVER";
         }
         const title = document.createElement("span");
-        title.textContent = element.title        
+
+        title.textContent = current.title;
+        title.classList.add("book-title");
+
+        const infoButton = document.createElement("button");
+        infoButton.classList.add("book-card-info-button");
+        const removeButton = document.createElement("button");
+        removeButton.classList.add("book-card-remove-button");
+        let buttons = document.createElement("div")
+        buttons.classList.add("book-card-buttons");
+        buttons.append(infoButton,removeButton);
+        let bookcardHover = document.createElement("div");
+        bookcardHover.append(title,buttons)
+        bookcardHover.classList.add("book-card-hover")
+        bookCard.append(bookcardHover);
+        bookCard.append(imagePlaceHolder);    
         bookWindow.append(bookCard);
-    });
+
+        removeButton.addEventListener("click",() => bookCard.remove());
+        infoButton.addEventListener("click",() => {
+            const infoScreen = document.createElement("div");
+            infoScreen.classList.add("info-screen");
+            infoScreen.innerText = `Title: ${current.title}\nAuthor: ${current.author}\nPages: ${current.pages}\nRelease year: ${current.year}\n\n`
+            const readButton = document.createElement("input");
+            readButton.setAttribute("type","checkbox");
+            readButton.checked = current.read;
+            readButton.addEventListener ("change",() => {
+                if (current.read) {
+                    current.read = false;
+                }else current.read = true;
+            })
+            infoScreen.append(readButton);
+            bookCard.append(infoScreen);
+        })
+    }
 }
 
 
@@ -44,9 +80,8 @@ function addBookToLibrary () {
 
 // Clear div
     initialBookWindow.style.display = "none";
-    
     file = [];
-
+    let fileAddedNest = false;
 // Create form
 
     const form = document.createElement("form");
@@ -117,7 +152,7 @@ function addBookToLibrary () {
     coverSpan.setAttribute("class","output");
 
     coverInput.addEventListener("change", () => {
-
+        fileAddedNest = true;
         const cover = document.querySelector("#cover");
 
         for (const file of cover.files){
@@ -169,7 +204,7 @@ function addBookToLibrary () {
         if (form.reportValidity()) {
             const formData = new FormData(form);
         
-            const uniqueid = crypto.randomUUID();
+            let uniqueid = crypto.randomUUID();
             let title = formData.get("title");
             let author = formData.get("author"); 
             let pages = formData.get("pages");
@@ -185,13 +220,14 @@ function addBookToLibrary () {
             
             form.addEventListener("transitionend",()=>{
                 return [
+                fileAdded = fileAddedNest,
                 file.push(cover.files[0]),
                 myLibrary.push(newBook),
                 addBookCard(),
-                form.style.display = "none",
+                form.remove(),
                 initialBookWindow.style.display = ""
                 ];
-            })
+            }, {once: true})
             
         }
     

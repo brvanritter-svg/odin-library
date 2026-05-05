@@ -236,3 +236,84 @@ form span {
     font-size: 12px;
     color: darkgray;
 }
+
+.books {
+    display: grid;
+    gap: 5px;
+    grid-template-columns: repeat(auto-fit,250px);
+    justify-content: center;
+    gap: 1em;
+}
+
+.book-card {
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 16px;
+    display: grid;
+    grid-template-areas: "stack";
+    height: 250px;
+    position: relative;
+    overflow: hidden;
+}
+.book-card > * {
+    grid-area: stack;
+    
+}
+.book-card .book-card-hover {
+    background-color: rgba(25, 25, 25, 0.7);
+    font-size: 20px;
+    font-weight: bold;
+    display: none;
+    padding: 1em;
+    text-align: center;
+    
+}
+
+
+.book-card .image-placeholder img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.book-card .image-placeholder {
+    justify-self: center;
+    align-self: center;
+}
+
+.book-card:hover .book-card-hover {
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    
+}
+.book-card-hover .book-title {
+    height: 30%;
+
+}
+.book-card-buttons  {
+    align-self: center;
+    flex: 1;
+    
+}
+.book-card-buttons button {
+    background-color: white;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+
+    margin: 0 1em;
+}
+.book-card-info-button {
+    content: url(images/information-outline.svg);
+}
+.book-card-remove-button {
+    content: url(images/delete-outline.svg);
+    
+}
+.info-screen {
+    display: none;
+}
+.book-card:hover .info-screen {
+    display: block;
+    z-index: 1;
+}
